@@ -225,10 +225,10 @@ class CS_API:
                 emotion = "Neutral"
             assert language is None, "❗ language is not supported for V1 model."
         elif self.model == "XTTS":
-            assert emotion is None, f"❗ Emotions are not supported for XTTS model. Use V1 model."
+            assert emotion is None, "❗ Emotions are not supported for XTTS model. Use V1 model."
             assert language is None, "❗ Language is not supported for XTTS model. Use XTTS-multilang model."
         elif self.model == "XTTS-multilang":
-            assert emotion is None, f"❗ Emotions are not supported for XTTS-multilang model. Use V1 model."
+            assert emotion is None, "❗ Emotions are not supported for XTTS-multilang model. Use V1 model."
             assert language is not None, "❗ Language is required for XTTS-multilang model."
             assert (
                 language in self.SUPPORTED_LANGUAGES
