@@ -1,12 +1,11 @@
-import os
-import re
 import json
-
-import torch
-from tokenizers import Tokenizer
+import re
 
 import pypinyin
+import torch
 from num2words import num2words
+from tokenizers import Tokenizer
+
 from TTS.tts.layers.xtts.zh_num2words import TextNorm as zh_num2words
 
 _whitespace_re = re.compile(r"\s+")

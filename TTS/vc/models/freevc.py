@@ -6,14 +6,14 @@ import numpy as np
 import torch
 from coqpit import Coqpit
 from torch import nn
-from torch.nn import AvgPool1d, Conv1d, Conv2d, ConvTranspose1d
+from torch.nn import Conv1d, Conv2d, ConvTranspose1d
 from torch.nn import functional as F
 from torch.nn.utils import remove_weight_norm, spectral_norm, weight_norm
 
 import TTS.vc.modules.freevc.commons as commons
 import TTS.vc.modules.freevc.modules as modules
 from TTS.tts.utils.speakers import SpeakerManager
-from TTS.utils.io import load_fsspec, save_checkpoint
+from TTS.utils.io import load_fsspec
 from TTS.vc.configs.shared_configs import BaseVCConfig
 from TTS.vc.models.base_vc import BaseVC
 from TTS.vc.modules.freevc.commons import get_padding, init_weights
