@@ -73,7 +73,7 @@ class ModelManager(object):
         """
 
         def _add_model(model_name: str):
-            if not "coqui_studio" in model_name:
+            if "coqui_studio" not in model_name:
                 return
             model_type, lang, dataset, model = model_name.split("/")
             if model_type not in self.models_dict:
@@ -508,7 +508,7 @@ class ModelManager(object):
                     sub_conf[field_names[-1]] = new_path
             else:
                 # field name points to a top-level field
-                if not field_name in config:
+                if field_name not in config:
                     return
                 if isinstance(config[field_name], list):
                     config[field_name] = [new_path]
