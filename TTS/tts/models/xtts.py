@@ -397,7 +397,7 @@ class Xtts(BaseTTS):
         max_ref_length=10,
         librosa_trim_db=None,
         sound_norm_refs=False,
-    ):  
+    ):
         speaker_embedding = None
         diffusion_cond_latents = None
 
@@ -834,10 +834,14 @@ class Xtts(BaseTTS):
             self.load_state_dict(checkpoint, strict=strict)
 
         if eval:
-            if hasattr(self, "hifigan_decoder"): self.hifigan_decoder.eval()
-            if hasattr(self, "ne_hifigan_decoder"): self.hifigan_decoder.eval()
-            if hasattr(self, "diffusion_decoder"): self.diffusion_decoder.eval()
-            if hasattr(self, "vocoder"): self.vocoder.eval()
+            if hasattr(self, "hifigan_decoder"):
+                self.hifigan_decoder.eval()
+            if hasattr(self, "ne_hifigan_decoder"):
+                self.hifigan_decoder.eval()
+            if hasattr(self, "diffusion_decoder"):
+                self.diffusion_decoder.eval()
+            if hasattr(self, "vocoder"):
+                self.vocoder.eval()
             self.gpt.init_gpt_for_inference(kv_cache=self.args.kv_cache, use_deepspeed=use_deepspeed)
             self.gpt.eval()
 
