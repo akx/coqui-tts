@@ -21,6 +21,7 @@ from transformers import (
     PreTrainedModel,
     StoppingCriteriaList,
 )
+from transformers.generation import validate_stopping_criteria
 from transformers.generation.utils import GenerateOutput, SampleOutput, logger
 
 

@@ -19,14 +19,16 @@ from TTS.tts.layers.delightful_tts.pitch_adaptor import PitchAdaptor
 from TTS.tts.layers.delightful_tts.variance_predictor import VariancePredictor
 from TTS.tts.layers.generic.aligner import AlignmentNetwork
 from TTS.tts.utils.helpers import generate_path, maximum_path, sequence_mask
+from TTS.tts.utils.speakers import SpeakerManager
+from TTS.tts.utils.text import TTSTokenizer
 
 
 class AcousticModel(torch.nn.Module):
     def __init__(
         self,
-        args: "ModelArgs",
-        tokenizer: "TTSTokenizer" = None,
-        speaker_manager: "SpeakerManager" = None,
+        args,  # TODO: type = ModelArgs?
+        tokenizer: TTSTokenizer = None,
+        speaker_manager: SpeakerManager = None,
     ):
         super().__init__()
         self.args = args

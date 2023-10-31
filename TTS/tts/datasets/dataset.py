@@ -10,6 +10,7 @@ import tqdm
 from torch.utils.data import Dataset
 
 from TTS.tts.utils.data import prepare_data, prepare_stop_target, prepare_tensor
+from TTS.tts.utils.text import TTSTokenizer
 from TTS.utils.audio import AudioProcessor
 from TTS.utils.audio.numpy_transforms import compute_energy as calculate_energy
 
@@ -49,7 +50,7 @@ class TTSDataset(Dataset):
         compute_linear_spec: bool = False,
         ap: AudioProcessor = None,
         samples: List[Dict] = None,
-        tokenizer: "TTSTokenizer" = None,
+        tokenizer: TTSTokenizer = None,
         compute_f0: bool = False,
         compute_energy: bool = False,
         f0_cache_path: str = None,
@@ -586,7 +587,7 @@ class PhonemeDataset(Dataset):
     def __init__(
         self,
         samples: Union[List[Dict], List[List]],
-        tokenizer: "TTSTokenizer",
+        tokenizer: TTSTokenizer,
         cache_path: str,
         precompute_num_workers=0,
     ):

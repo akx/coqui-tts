@@ -5,6 +5,7 @@ import random
 import re
 
 import numpy as np
+from coqpit import Coqpit
 from scipy import signal
 
 from TTS.encoder.models.lstm import LSTMSpeakerEncoder
@@ -123,7 +124,7 @@ def to_camel(text):
     return re.sub(r"(?!^)_([a-zA-Z])", lambda m: m.group(1).upper(), text)
 
 
-def setup_encoder_model(config: "Coqpit"):
+def setup_encoder_model(config: Coqpit):
     if config.model_params["model_name"].lower() == "lstm":
         model = LSTMSpeakerEncoder(
             config.model_params["input_dim"],
