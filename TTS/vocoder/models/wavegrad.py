@@ -11,6 +11,7 @@ from torch.utils.data.distributed import DistributedSampler
 from trainer.trainer_utils import get_optimizer, get_scheduler
 
 from TTS.utils.io import load_fsspec
+from TTS.vocoder.configs.wavegrad_config import WavegradConfig
 from TTS.vocoder.datasets import WaveGradDataset
 from TTS.vocoder.layers.wavegrad import Conv1d, DBlock, FiLM, UBlock
 from TTS.vocoder.models.base_vocoder import BaseVocoder
@@ -56,7 +57,7 @@ class Wavegrad(BaseVocoder):
     """
 
     # pylint: disable=dangerous-default-value
-    def __init__(self, config: Coqpit):
+    def __init__(self, config: WavegradConfig):
         super().__init__(config)
         self.config = config
         self.use_weight_norm = config.model_params.use_weight_norm
@@ -270,7 +271,7 @@ class Wavegrad(BaseVocoder):
     ) -> None:
         pass
 
-    def test(self, assets: Dict, test_loader: "DataLoader", outputs=None):  # pylint: disable=unused-argument
+    def test(self, assets: Dict, test_loader: DataLoader, outputs=None):  # pylint: disable=unused-argument
         # setup noise schedule and inference
         ap = assets["audio_processor"]
         noise_schedule = self.config["test_noise_schedule"]
@@ -340,5 +341,5 @@ class Wavegrad(BaseVocoder):
         self.compute_noise_level(betas)
 
     @staticmethod
-    def init_from_config(config: "WavegradConfig"):
+    def init_from_config(config: WavegradConfig):
         return Wavegrad(config)

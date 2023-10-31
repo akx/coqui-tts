@@ -1,6 +1,8 @@
 from dataclasses import replace
 from typing import Dict
 
+from coqpit import Coqpit
+
 from TTS.tts.configs.shared_configs import CharactersConfig
 
 
@@ -315,7 +317,7 @@ class BaseCharacters:
         print(f"{indent}| > Num chars: {self.num_chars}")
 
     @staticmethod
-    def init_from_config(config: "Coqpit"):  # pylint: disable=unused-argument
+    def init_from_config(config: Coqpit):  # pylint: disable=unused-argument
         """Init your character class from a config.
 
         Implement this method for your subclass.
@@ -387,7 +389,7 @@ class IPAPhonemes(BaseCharacters):
         super().__init__(characters, punctuations, pad, eos, bos, blank, is_unique, is_sorted)
 
     @staticmethod
-    def init_from_config(config: "Coqpit"):
+    def init_from_config(config: Coqpit):
         """Init a IPAPhonemes object from a model config
 
         If characters are not defined in the config, it will be set to the default characters and the config
@@ -462,7 +464,7 @@ class Graphemes(BaseCharacters):
         super().__init__(characters, punctuations, pad, eos, bos, blank, is_unique, is_sorted)
 
     @staticmethod
-    def init_from_config(config: "Coqpit"):
+    def init_from_config(config: Coqpit):
         """Init a Graphemes object from a model config
 
         If characters are not defined in the config, it will be set to the default characters and the config

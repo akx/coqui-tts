@@ -7,6 +7,7 @@ from torch import nn
 from torch.cuda.amp.autocast_mode import autocast
 from trainer.trainer_utils import get_optimizer, get_scheduler
 
+from TTS.tts.configs.tacotron_config import TacotronConfig
 from TTS.tts.layers.tacotron.capacitron_layers import CapacitronVAE
 from TTS.tts.layers.tacotron.gst_layers import GST
 from TTS.tts.layers.tacotron.tacotron import Decoder, Encoder, PostCBHG
@@ -15,6 +16,7 @@ from TTS.tts.utils.measures import alignment_diagonal_score
 from TTS.tts.utils.speakers import SpeakerManager
 from TTS.tts.utils.text.tokenizer import TTSTokenizer
 from TTS.tts.utils.visual import plot_alignment, plot_spectrogram
+from TTS.utils.audio import AudioProcessor
 from TTS.utils.capacitron_optimizer import CapacitronOptimizer
 
 
@@ -31,9 +33,9 @@ class Tacotron(BaseTacotron):
 
     def __init__(
         self,
-        config: "TacotronConfig",
-        ap: "AudioProcessor" = None,
-        tokenizer: "TTSTokenizer" = None,
+        config: TacotronConfig,
+        ap: AudioProcessor = None,
+        tokenizer: TTSTokenizer = None,
         speaker_manager: SpeakerManager = None,
     ):
         super().__init__(config, ap, tokenizer, speaker_manager)
@@ -393,7 +395,7 @@ class Tacotron(BaseTacotron):
         logger.eval_audios(steps, audios, self.ap.sample_rate)
 
     @staticmethod
-    def init_from_config(config: "TacotronConfig", samples: Union[List[List], List[Dict]] = None):
+    def init_from_config(config: TacotronConfig, samples: Union[List[List], List[Dict]] = None):
         """Initiate model from config
 
         Args:

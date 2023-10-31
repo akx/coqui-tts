@@ -19,6 +19,7 @@ from trainer.torch import DistributedSampler, DistributedSamplerWrapper
 from trainer.trainer_utils import get_optimizer, get_scheduler
 
 from TTS.tts.configs.shared_configs import CharactersConfig
+from TTS.tts.configs.vits_config import VitsConfig
 from TTS.tts.datasets.dataset import TTSDataset, _parse_sample
 from TTS.tts.layers.glow_tts.duration_predictor import DurationPredictor
 from TTS.tts.layers.vits.discriminator import VitsDiscriminator
@@ -33,6 +34,7 @@ from TTS.tts.utils.synthesis import synthesis
 from TTS.tts.utils.text.characters import BaseCharacters, BaseVocabulary, _characters, _pad, _phonemes, _punctuations
 from TTS.tts.utils.text.tokenizer import TTSTokenizer
 from TTS.tts.utils.visual import plot_alignment
+from TTS.utils.audio import AudioProcessor
 from TTS.utils.io import load_fsspec
 from TTS.utils.samplers import BucketBatchSampler
 from TTS.vocoder.models.hifigan_generator import HifiganGenerator
@@ -631,8 +633,8 @@ class Vits(BaseTTS):
     def __init__(
         self,
         config: Coqpit,
-        ap: "AudioProcessor" = None,
-        tokenizer: "TTSTokenizer" = None,
+        ap: AudioProcessor = None,
+        tokenizer: TTSTokenizer = None,
         speaker_manager: SpeakerManager = None,
         language_manager: LanguageManager = None,
     ):
@@ -1769,7 +1771,7 @@ class Vits(BaseTTS):
             assert not self.training
 
     @staticmethod
-    def init_from_config(config: "VitsConfig", samples: Union[List[List], List[Dict]] = None, verbose=True):
+    def init_from_config(config: VitsConfig, samples: Union[List[List], List[Dict]] = None, verbose=True):
         """Initiate model from config
 
         Args:

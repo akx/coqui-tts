@@ -14,6 +14,7 @@ from torch.utils.data.distributed import DistributedSampler
 from TTS.tts.utils.visual import plot_spectrogram
 from TTS.utils.audio import AudioProcessor
 from TTS.utils.io import load_fsspec
+from TTS.vocoder.configs.wavernn_config import WavernnConfig
 from TTS.vocoder.datasets.wavernn_dataset import WaveRNNDataset
 from TTS.vocoder.layers.losses import WaveRNNLoss
 from TTS.vocoder.models.base_vocoder import BaseVocoder
@@ -190,7 +191,7 @@ class WavernnArgs(Coqpit):
 
 
 class Wavernn(BaseVocoder):
-    def __init__(self, config: Coqpit):
+    def __init__(self, config: WavernnConfig):
         """🐸 WaveRNN model.
         Original paper - https://arxiv.org/abs/1802.08435
         Official implementation - https://github.com/fatchord/WaveRNN
@@ -202,7 +203,7 @@ class Wavernn(BaseVocoder):
             RuntimeError: [description]
 
         Examples:
-            >>> from TTS.vocoder.configs import WavernnConfig
+            >>> from TTS.vocoder.configs.wavernn_config import WavernnConfig
             >>> config = WavernnConfig()
             >>> model = Wavernn(config)
 
@@ -568,7 +569,7 @@ class Wavernn(BaseVocoder):
 
     @torch.no_grad()
     def test(
-        self, assets: Dict, test_loader: "DataLoader", output: Dict  # pylint: disable=unused-argument
+        self, assets: Dict, test_loader: DataLoader, output: Dict  # pylint: disable=unused-argument
     ) -> Tuple[Dict, Dict]:
         ap = self.ap
         figures = {}
@@ -641,5 +642,5 @@ class Wavernn(BaseVocoder):
         return WaveRNNLoss(self.args.mode)
 
     @staticmethod
-    def init_from_config(config: "WavernnConfig"):
+    def init_from_config(config: WavernnConfig):
         return Wavernn(config)

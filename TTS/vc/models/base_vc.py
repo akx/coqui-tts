@@ -17,6 +17,7 @@ from TTS.tts.utils.languages import LanguageManager, get_language_balancer_weigh
 from TTS.tts.utils.speakers import SpeakerManager, get_speaker_balancer_weights
 from TTS.tts.utils.synthesis import synthesis
 from TTS.tts.utils.visual import plot_alignment, plot_spectrogram
+from TTS.utils.audio import AudioProcessor
 
 # pylint: skip-file
 
@@ -32,7 +33,7 @@ class BaseVC(BaseTrainerModel):
     def __init__(
         self,
         config: Coqpit,
-        ap: "AudioProcessor",
+        ap: AudioProcessor,
         speaker_manager: SpeakerManager = None,
         language_manager: LanguageManager = None,
     ):

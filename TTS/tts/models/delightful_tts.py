@@ -18,6 +18,7 @@ from torch.utils.data.sampler import WeightedRandomSampler
 from trainer.torch import DistributedSampler, DistributedSamplerWrapper
 from trainer.trainer_utils import get_optimizer, get_scheduler
 
+from TTS.tts.configs.delightful_tts_config import DelightfulTTSConfig
 from TTS.tts.datasets.dataset import F0Dataset, TTSDataset, _parse_sample
 from TTS.tts.layers.delightful_tts.acoustic_model import AcousticModel
 from TTS.tts.layers.losses import ForwardSumLoss, VitsDiscriminatorLoss
@@ -662,7 +663,7 @@ class DelightfulTTS(BaseTTSE2E):
         self,
         config: Coqpit,
         ap,
-        tokenizer: "TTSTokenizer" = None,
+        tokenizer: TTSTokenizer = None,
         speaker_manager: SpeakerManager = None,
     ):
         super().__init__(config=config, ap=ap, tokenizer=tokenizer, speaker_manager=speaker_manager)
@@ -1525,7 +1526,9 @@ class DelightfulTTS(BaseTTSE2E):
 
     @staticmethod
     def init_from_config(
-        config: "DelightfulTTSConfig", samples: Union[List[List], List[Dict]] = None, verbose=False
+        config: DelightfulTTSConfig,
+        samples: Union[List[List], List[Dict]] = None,
+        verbose=False,
     ):  # pylint: disable=unused-argument
         """Initiate model from config
 

@@ -6,6 +6,7 @@ import numpy as np
 import scipy.io.wavfile
 import scipy.signal
 import soundfile as sf
+from coqpit import Coqpit
 
 from TTS.tts.utils.helpers import StandardScaler
 from TTS.utils.audio.numpy_transforms import compute_f0
@@ -227,7 +228,7 @@ class AudioProcessor(object):
             self.symmetric_norm = None
 
     @staticmethod
-    def init_from_config(config: "Coqpit", verbose=True):
+    def init_from_config(config: Coqpit, verbose=True):
         if "audio" in config:
             return AudioProcessor(verbose=verbose, **config.audio)
         return AudioProcessor(verbose=verbose, **config)

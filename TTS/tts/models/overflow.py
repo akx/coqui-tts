@@ -6,6 +6,7 @@ from coqpit import Coqpit
 from torch import nn
 from trainer.logging.tensorboard_logger import TensorboardLogger
 
+from TTS.tts.configs.overflow_config import OverflowConfig
 from TTS.tts.layers.overflow.common_layers import Encoder, OverflowUtils
 from TTS.tts.layers.overflow.decoder import Decoder
 from TTS.tts.layers.overflow.neural_hmm import NeuralHMM
@@ -17,6 +18,7 @@ from TTS.tts.models.base_tts import BaseTTS
 from TTS.tts.utils.speakers import SpeakerManager
 from TTS.tts.utils.text.tokenizer import TTSTokenizer
 from TTS.tts.utils.visual import plot_alignment, plot_spectrogram
+from TTS.utils.audio import AudioProcessor
 from TTS.utils.generic_utils import format_aux_input
 from TTS.utils.io import load_fsspec
 
@@ -61,9 +63,9 @@ class Overflow(BaseTTS):
 
     def __init__(
         self,
-        config: "OverFlowConfig",
-        ap: "AudioProcessor" = None,
-        tokenizer: "TTSTokenizer" = None,
+        config: OverflowConfig,
+        ap: AudioProcessor = None,
+        tokenizer: TTSTokenizer = None,
         speaker_manager: SpeakerManager = None,
     ):
         super().__init__(config, ap, tokenizer, speaker_manager)
@@ -250,7 +252,7 @@ class Overflow(BaseTTS):
         return NLLLoss()
 
     @staticmethod
-    def init_from_config(config: "OverFlowConfig", samples: Union[List[List], List[Dict]] = None, verbose=True):
+    def init_from_config(config: OverflowConfig, samples: Union[List[List], List[Dict]] = None, verbose=True):
         """Initiate model from config
 
         Args:

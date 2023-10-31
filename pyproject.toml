@@ -39,7 +39,6 @@ ignore = [
     "PLR0913", # too-many-arguments
     "PLR0915", # too-many-statements
     "UP004", # useless-object-inheritance
-    "F821", # TODO: enable
     "F841", # TODO: enable
     "PLW0602", # TODO: enable
     "PLW2901", # TODO: enable

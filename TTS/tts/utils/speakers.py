@@ -83,7 +83,7 @@ class SpeakerManager(EmbeddingManager):
         return self.name_to_id
 
     @staticmethod
-    def init_from_config(config: "Coqpit", samples: Union[List[List], List[Dict]] = None) -> "SpeakerManager":
+    def init_from_config(config: Coqpit, samples: Union[List[List], List[Dict]] = None) -> "SpeakerManager":
         """Initialize a speaker manager from config
 
         Args:

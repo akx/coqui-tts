@@ -7,6 +7,7 @@ from coqpit import Coqpit
 from encodec import EncodecModel
 from transformers import BertTokenizer
 
+from TTS.tts.configs.bark_config import BarkConfig
 from TTS.tts.layers.bark.inference_funcs import (
     codec_decode,
     generate_coarse,
@@ -235,7 +236,7 @@ class Bark(BaseTTS):
         ...
 
     @staticmethod
-    def init_from_config(config: "BarkConfig", **kwargs):  # pylint: disable=unused-argument
+    def init_from_config(config: BarkConfig, **kwargs):  # pylint: disable=unused-argument
         return Bark(config)
 
     # pylint: disable=unused-argument, redefined-builtin

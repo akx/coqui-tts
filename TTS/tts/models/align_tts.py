@@ -5,6 +5,7 @@ import torch
 from coqpit import Coqpit
 from torch import nn
 
+from TTS.tts.configs.align_tts_config import AlignTTSConfig
 from TTS.tts.layers.align_tts.mdn import MDNBlock
 from TTS.tts.layers.feed_forward.decoder import Decoder
 from TTS.tts.layers.feed_forward.duration_predictor import DurationPredictor
@@ -15,6 +16,7 @@ from TTS.tts.utils.helpers import generate_path, maximum_path, sequence_mask
 from TTS.tts.utils.speakers import SpeakerManager
 from TTS.tts.utils.text.tokenizer import TTSTokenizer
 from TTS.tts.utils.visual import plot_alignment, plot_spectrogram
+from TTS.utils.audio import AudioProcessor
 from TTS.utils.io import load_fsspec
 
 
@@ -104,9 +106,9 @@ class AlignTTS(BaseTTS):
 
     def __init__(
         self,
-        config: "AlignTTSConfig",
-        ap: "AudioProcessor" = None,
-        tokenizer: "TTSTokenizer" = None,
+        config: AlignTTSConfig,
+        ap: AudioProcessor = None,
+        tokenizer: TTSTokenizer = None,
         speaker_manager: SpeakerManager = None,
     ):
         super().__init__(config, ap, tokenizer, speaker_manager)
@@ -432,7 +434,7 @@ class AlignTTS(BaseTTS):
         self.phase = self._set_phase(trainer.config, trainer.total_steps_done)
 
     @staticmethod
-    def init_from_config(config: "AlignTTSConfig", samples: Union[List[List], List[Dict]] = None):
+    def init_from_config(config: AlignTTSConfig, samples: Union[List[List], List[Dict]] = None):
         """Initiate model from config
 
         Args:

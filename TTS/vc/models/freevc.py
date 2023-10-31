@@ -446,8 +446,7 @@ class FreeVC(BaseVC):
         https://github.com/OlaWod/FreeVC
 
     Examples:
-        >>> from TTS.vc.configs.freevc_config import FreeVCConfig
-        >>> from TTS.vc.models.freevc import FreeVC
+        >>> from TTS.vc.models.freevc import FreeVC, FreeVCConfig
         >>> config = FreeVCConfig()
         >>> model = FreeVC(config)
     """
@@ -677,7 +676,11 @@ class FreeVC(BaseVC):
         ...
 
     @staticmethod
-    def init_from_config(config: "VitsConfig", samples: Union[List[List], List[Dict]] = None, verbose=True):
+    def init_from_config(
+        config: "FreeVCConfig",
+        samples: Union[List[List], List[Dict]] = None,
+        verbose=True,
+    ):
         model = FreeVC(config)
         return model
 

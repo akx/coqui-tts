@@ -6,6 +6,7 @@ from coqpit import Coqpit
 from torch import nn
 from torch.cuda.amp.autocast_mode import autocast
 
+from TTS.tts.configs.fast_pitch_config import FastPitchConfig
 from TTS.tts.layers.feed_forward.decoder import Decoder
 from TTS.tts.layers.feed_forward.encoder import Encoder
 from TTS.tts.layers.generic.aligner import AlignmentNetwork
@@ -16,6 +17,7 @@ from TTS.tts.utils.helpers import average_over_durations, generate_path, maximum
 from TTS.tts.utils.speakers import SpeakerManager
 from TTS.tts.utils.text.tokenizer import TTSTokenizer
 from TTS.tts.utils.visual import plot_alignment, plot_avg_energy, plot_avg_pitch, plot_spectrogram
+from TTS.utils.audio import AudioProcessor
 from TTS.utils.io import load_fsspec
 
 
@@ -201,8 +203,8 @@ class ForwardTTS(BaseTTS):
     def __init__(
         self,
         config: Coqpit,
-        ap: "AudioProcessor" = None,
-        tokenizer: "TTSTokenizer" = None,
+        ap: AudioProcessor = None,
+        tokenizer: TTSTokenizer = None,
         speaker_manager: SpeakerManager = None,
     ):
         super().__init__(config, ap, tokenizer, speaker_manager)
@@ -842,7 +844,10 @@ class ForwardTTS(BaseTTS):
         self.binary_loss_weight = min(trainer.epochs_done / self.config.binary_loss_warmup_epochs, 1.0) * 1.0
 
     @staticmethod
-    def init_from_config(config: "ForwardTTSConfig", samples: Union[List[List], List[Dict]] = None):
+    def init_from_config(
+        config: FastPitchConfig,  # TODO: is this the correct class?
+        samples: Union[List[List], List[Dict]] = None,
+    ):
         """Initiate model from config
 
         Args:

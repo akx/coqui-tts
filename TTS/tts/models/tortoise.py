@@ -10,6 +10,7 @@ import torchaudio
 from coqpit import Coqpit
 from tqdm import tqdm
 
+from TTS.tts.configs.tortoise_config import TortoiseConfig
 from TTS.tts.layers.tortoise.arch_utils import TorchMelSpectrogram
 from TTS.tts.layers.tortoise.audio_utils import denormalize_tacotron_mel, load_voice, wav_to_univnet_mel
 from TTS.tts.layers.tortoise.autoregressive import UnifiedVoice
@@ -839,7 +840,7 @@ class Tortoise(BaseTTS):
         raise NotImplementedError("Tortoise Training is not implemented")
 
     @staticmethod
-    def init_from_config(config: "TortoiseConfig", **kwargs):  # pylint: disable=unused-argument
+    def init_from_config(config: TortoiseConfig, **kwargs):  # pylint: disable=unused-argument
         return Tortoise(config)
 
     def load_checkpoint(

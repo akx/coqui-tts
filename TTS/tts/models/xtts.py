@@ -7,6 +7,7 @@ import torch.nn.functional as F
 import torchaudio
 from coqpit import Coqpit
 
+from TTS.tts.configs.xtts_config import XttsConfig
 from TTS.tts.layers.tortoise.audio_utils import denormalize_tacotron_mel, wav_to_univnet_mel
 from TTS.tts.layers.tortoise.diffusion_decoder import DiffusionTts
 from TTS.tts.layers.xtts.diffusion import SpacedDiffusion, get_named_beta_schedule, space_timesteps
@@ -761,7 +762,7 @@ class Xtts(BaseTTS):
         raise NotImplementedError("XTTS has a dedicated trainer, please check the XTTS docs: https://tts.readthedocs.io/en/dev/models/xtts.html#training")
 
     @staticmethod
-    def init_from_config(config: "XttsConfig", **kwargs):  # pylint: disable=unused-argument
+    def init_from_config(config: XttsConfig, **kwargs):  # pylint: disable=unused-argument
         return Xtts(config)
 
     def eval(self):  # pylint: disable=redefined-builtin

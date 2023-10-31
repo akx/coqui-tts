@@ -1,8 +1,10 @@
 from typing import Callable, Dict, List, Union
 
+from coqpit import Coqpit
+
 from TTS.tts.utils.text import cleaners
-from TTS.tts.utils.text.characters import Graphemes, IPAPhonemes
-from TTS.tts.utils.text.phonemizers import DEF_LANG_TO_PHONEMIZER, get_phonemizer_by_name
+from TTS.tts.utils.text.characters import BaseCharacters, Graphemes, IPAPhonemes
+from TTS.tts.utils.text.phonemizers import DEF_LANG_TO_PHONEMIZER, BasePhonemizer, get_phonemizer_by_name
 from TTS.tts.utils.text.phonemizers.multi_phonemizer import MultiPhonemizer
 from TTS.utils.generic_utils import get_import_path, import_class
 
@@ -39,8 +41,8 @@ class TTSTokenizer:
         self,
         use_phonemes=False,
         text_cleaner: Callable = None,
-        characters: "BaseCharacters" = None,
-        phonemizer: Union["Phonemizer", Dict] = None,
+        characters: BaseCharacters = None,
+        phonemizer: Union[BasePhonemizer, Dict] = None,
         add_blank: bool = False,
         use_eos_bos=False,
     ):
@@ -147,7 +149,7 @@ class TTSTokenizer:
                 print(f"{indent}| > {char}")
 
     @staticmethod
-    def init_from_config(config: "Coqpit", characters: "BaseCharacters" = None):
+    def init_from_config(config: Coqpit, characters: BaseCharacters = None):
         """Init Tokenizer object from config
 
         Args:

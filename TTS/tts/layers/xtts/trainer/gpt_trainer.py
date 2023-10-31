@@ -461,7 +461,7 @@ class GPTTrainer(BaseTTS):
             assert not self.training
 
     @staticmethod
-    def init_from_config(config: "GPTTrainerConfig", samples: Union[List[List], List[Dict]] = None):
+    def init_from_config(config: GPTTrainerConfig, samples: Union[List[List], List[Dict]] = None):
         """Initiate model from config
 
         Args:

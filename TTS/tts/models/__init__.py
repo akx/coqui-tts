@@ -1,9 +1,12 @@
 from typing import Dict, List, Union
 
+from coqpit import Coqpit
+
+from TTS.tts.models.base_tts import BaseTTS
 from TTS.utils.generic_utils import find_module
 
 
-def setup_model(config: "Coqpit", samples: Union[List[List], List[Dict]] = None) -> "BaseTTS":
+def setup_model(config: Coqpit, samples: Union[List[List], List[Dict]] = None) -> BaseTTS:
     print(" > Using model: {}".format(config.model))
     # fetch the right model implementation.
     if "base_model" in config and config["base_model"] is not None:
