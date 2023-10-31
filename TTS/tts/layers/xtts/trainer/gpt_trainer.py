@@ -222,7 +222,7 @@ class GPTTrainer(BaseTTS):
         return {"audios": test_audios}
 
     def test_log(
-        self, outputs: dict, logger: "Logger", assets: dict, steps: int  # pylint: disable=unused-argument
+        self, outputs: dict, logger, assets: dict, steps: int  # pylint: disable=unused-argument
     ) -> None:
         logger.test_audios(steps, outputs["audios"], self.args.output_sample_rate)
 

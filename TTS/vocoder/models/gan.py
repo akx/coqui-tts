@@ -205,7 +205,7 @@ class GAN(BaseVocoder):
         return figures, audios
 
     def train_log(
-        self, batch: Dict, outputs: Dict, logger: "Logger", assets: Dict, steps: int  # pylint: disable=unused-argument
+        self, batch: Dict, outputs: Dict, logger, assets: Dict, steps: int  # pylint: disable=unused-argument
     ) -> Tuple[Dict, np.ndarray]:
         """Call `_log()` for training."""
         figures, audios = self._log("eval", self.ap, batch, outputs)
@@ -219,7 +219,7 @@ class GAN(BaseVocoder):
         return self.train_step(batch, criterion, optimizer_idx)
 
     def eval_log(
-        self, batch: Dict, outputs: Dict, logger: "Logger", assets: Dict, steps: int  # pylint: disable=unused-argument
+        self, batch: Dict, outputs: Dict, logger, assets: Dict, steps: int  # pylint: disable=unused-argument
     ) -> Tuple[Dict, np.ndarray]:
         """Call `_log()` for evaluation."""
         figures, audios = self._log("eval", self.ap, batch, outputs)

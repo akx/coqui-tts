@@ -1348,7 +1348,7 @@ class Vits(BaseTTS):
         return figures, audios
 
     def train_log(
-        self, batch: dict, outputs: dict, logger: "Logger", assets: dict, steps: int
+        self, batch: dict, outputs: dict, logger, assets: dict, steps: int
     ):  # pylint: disable=no-self-use
         """Create visualizations and waveform examples.
 
@@ -1371,7 +1371,7 @@ class Vits(BaseTTS):
     def eval_step(self, batch: dict, criterion: nn.Module, optimizer_idx: int):
         return self.train_step(batch, criterion, optimizer_idx)
 
-    def eval_log(self, batch: dict, outputs: dict, logger: "Logger", assets: dict, steps: int) -> None:
+    def eval_log(self, batch: dict, outputs: dict, logger, assets: dict, steps: int) -> None:
         figures, audios = self._log(self.ap, batch, outputs, "eval")
         logger.eval_figures(steps, figures)
         logger.eval_audios(steps, audios, self.ap.sample_rate)
@@ -1456,7 +1456,7 @@ class Vits(BaseTTS):
         return {"figures": test_figures, "audios": test_audios}
 
     def test_log(
-        self, outputs: dict, logger: "Logger", assets: dict, steps: int  # pylint: disable=unused-argument
+        self, outputs: dict, logger, assets: dict, steps: int  # pylint: disable=unused-argument
     ) -> None:
         logger.test_audios(steps, outputs["audios"], self.ap.sample_rate)
         logger.test_figures(steps, outputs["figures"])

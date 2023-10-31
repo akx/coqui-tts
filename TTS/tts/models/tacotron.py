@@ -378,7 +378,7 @@ class Tacotron(BaseTacotron):
         return figures, {"audio": audio}
 
     def train_log(
-        self, batch: dict, outputs: dict, logger: "Logger", assets: dict, steps: int
+        self, batch: dict, outputs: dict, logger, assets: dict, steps: int
     ) -> None:  # pylint: disable=no-self-use
         figures, audios = self._create_logs(batch, outputs, self.ap)
         logger.train_figures(steps, figures)
@@ -387,7 +387,7 @@ class Tacotron(BaseTacotron):
     def eval_step(self, batch: dict, criterion: nn.Module):
         return self.train_step(batch, criterion)
 
-    def eval_log(self, batch: dict, outputs: dict, logger: "Logger", assets: dict, steps: int) -> None:
+    def eval_log(self, batch: dict, outputs: dict, logger, assets: dict, steps: int) -> None:
         figures, audios = self._create_logs(batch, outputs, self.ap)
         logger.eval_figures(steps, figures)
         logger.eval_audios(steps, audios, self.ap.sample_rate)

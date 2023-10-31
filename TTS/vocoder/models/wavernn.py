@@ -590,7 +590,7 @@ class Wavernn(BaseVocoder):
         return figures, audios
 
     def test_log(
-        self, outputs: Dict, logger: "Logger", assets: Dict, steps: int  # pylint: disable=unused-argument
+        self, outputs: Dict, logger, assets: Dict, steps: int  # pylint: disable=unused-argument
     ) -> Tuple[Dict, np.ndarray]:
         figures, audios = outputs
         logger.eval_figures(steps, figures)

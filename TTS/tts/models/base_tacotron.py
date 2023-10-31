@@ -175,7 +175,7 @@ class BaseTacotron(BaseTTS):
         return {"figures": test_figures, "audios": test_audios}
 
     def test_log(
-        self, outputs: dict, logger: "Logger", assets: dict, steps: int  # pylint: disable=unused-argument
+        self, outputs: dict, logger, assets: dict, steps: int  # pylint: disable=unused-argument
     ) -> None:
         logger.test_audios(steps, outputs["audios"], self.ap.sample_rate)
         logger.test_figures(steps, outputs["figures"])

@@ -1097,7 +1097,7 @@ class DelightfulTTS(BaseTTSE2E):
         return figures, audios
 
     def train_log(
-        self, batch: dict, outputs: dict, logger: "Logger", assets: dict, steps: int
+        self, batch: dict, outputs: dict, logger, assets: dict, steps: int
     ):  # pylint: disable=no-self-use, unused-argument
         """Create visualizations and waveform examples.
 
@@ -1115,7 +1115,7 @@ class DelightfulTTS(BaseTTSE2E):
         logger.train_figures(steps, figures)
         logger.train_audios(steps, audios, self.ap.sample_rate)
 
-    def eval_log(self, batch: dict, outputs: dict, logger: "Logger", assets: dict, steps: int) -> None:
+    def eval_log(self, batch: dict, outputs: dict, logger, assets: dict, steps: int) -> None:
         figures, audios = self._log(batch=batch, outputs=outputs, name_prefix="vocoder/")
         logger.eval_figures(steps, figures)
         logger.eval_audios(steps, audios, self.ap.sample_rate)
@@ -1311,7 +1311,7 @@ class DelightfulTTS(BaseTTSE2E):
         return {"figures": test_figures, "audios": test_audios}
 
     def test_log(
-        self, outputs: dict, logger: "Logger", assets: dict, steps: int  # pylint: disable=unused-argument
+        self, outputs: dict, logger, assets: dict, steps: int  # pylint: disable=unused-argument
     ) -> None:
         logger.test_audios(steps, outputs["audios"], self.config.audio.sample_rate)
         logger.test_figures(steps, outputs["figures"])

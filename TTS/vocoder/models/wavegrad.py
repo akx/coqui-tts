@@ -257,7 +257,7 @@ class Wavegrad(BaseVocoder):
         return {"model_output": noise_hat}, {"loss": loss}
 
     def train_log(  # pylint: disable=no-self-use
-        self, batch: Dict, outputs: Dict, logger: "Logger", assets: Dict, steps: int  # pylint: disable=unused-argument
+        self, batch: Dict, outputs: Dict, logger, assets: Dict, steps: int  # pylint: disable=unused-argument
     ) -> Tuple[Dict, np.ndarray]:
         pass
 
@@ -266,7 +266,7 @@ class Wavegrad(BaseVocoder):
         return self.train_step(batch, criterion)
 
     def eval_log(  # pylint: disable=no-self-use
-        self, batch: Dict, outputs: Dict, logger: "Logger", assets: Dict, steps: int  # pylint: disable=unused-argument
+        self, batch: Dict, outputs: Dict, logger, assets: Dict, steps: int  # pylint: disable=unused-argument
     ) -> None:
         pass
 
